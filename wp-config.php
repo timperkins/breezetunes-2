@@ -16,13 +16,13 @@
 
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define('DB_NAME', 'breezetu_nes_2');
+define('DB_NAME', 'breezetunes_2');
 
 /** MySQL database username */
-define('DB_USER', 'breezetu_db');
+define('DB_USER', 'root');
 
 /** MySQL database password */
-define('DB_PASSWORD', 'b#;VPhBL?hO]');
+define('DB_PASSWORD', '');
 
 /** MySQL hostname */
 define('DB_HOST', 'localhost');
