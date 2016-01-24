@@ -10,7 +10,7 @@ get_header(); ?>
 	$cart = Cart::get_cart();
 ?>
 
-	<section class="main-sheet-music-wrap wrap-border">
+	<section class="main-sheet-music-wrap js-music-list wrap-border">
 		<div class="main-sheet-music">
 			<div class="main-sheet-music-inner clearfix">
 				<div class="content">

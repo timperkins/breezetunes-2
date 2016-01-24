@@ -6,6 +6,7 @@
 		public $price;
 		public $description;
 		public $featured;
+		public $tags;
 		private static $list = array();
 		public static function find_all($wpdb) {
 			if(!empty(self::$list)) {
@@ -73,9 +74,11 @@
 				'post_type' => 'music', 
 				'posts_per_page' => 2,
 				'orderby' => 'title', 
-				'order' => 'ASC',
+				'order' => 'ASC'
 			);
+			// lg(['args',$args]);
 			$loop = new WP_Query( $args );
+			// lg(['query', $loop]);	
 			while ( $loop->have_posts() ) : $loop->the_post();
 				$item = new self;
 				$item->id = get_the_ID();
@@ -90,7 +93,7 @@
 				$item->image = get_field('image')['sizes']['thumbnail'];
 				$item->featured = false;
 				self::$list[$item->id] = $item;
-
+				// lg(['item', $item]);
 			endwhile;
 
 			return $item;

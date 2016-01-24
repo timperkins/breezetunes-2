@@ -106,7 +106,12 @@
 
 		public function checkout() {
 			// TODO: Save to db
-			
+
+			lg('sending mail');
+			$to = 'tjp503@gmail.com';
+			$subject = 'Your order from Breezetunes';
+			$message = 'test yo';
+			wp_mail($to, $subject, $message);
 			
 			// Remove the cart items from the session
 			$this->items = array();

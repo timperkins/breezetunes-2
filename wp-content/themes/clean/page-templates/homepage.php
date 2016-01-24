@@ -10,7 +10,7 @@ get_header(); ?>
 
 	$sheet_item_nums = array();
 	if(is_local()) {
-		$sheet_item_nums = [354, 349];
+		$sheet_item_nums = [430, 424];
 	} else {
 		$sheet_item_nums = [378, 352];	
 	}
@@ -19,6 +19,9 @@ get_header(); ?>
 	foreach($sheet_item_nums as $num) {
 		$sheet_items[] = Item::find_by_id($wpdb, $num);
 	}
+
+	// lg('sheet items');
+	// lg($sheet_items);
 
 	$cart = Cart::get_cart();
 

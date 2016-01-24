@@ -1,3 +1,6 @@
+# Use PHP5.4 Single php.ini as default
+# Changed PHP handler from application/x-httpd-php54s to application/x-httpd-phpbetas on Thu Jan 14 05:01:06 MST 2016.
+#AddHandler application/x-httpd-phpbetas .php
 
 # BEGIN WordPress
 <IfModule mod_rewrite.c>
