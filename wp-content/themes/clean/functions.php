@@ -172,7 +172,7 @@
 		// main stuff
 		wp_register_script('mainjs', $tm_uri . '/js/main.js', array('jquery', 'jplayer', 'stripe'));
 		wp_enqueue_script('mainjs');
-		wp_register_style('maincss', $tm_uri . '/css/main.css');
+		wp_register_style('maincss', $tm_uri . '/css/main-1.0.0.css');
 		wp_enqueue_style('maincss');	
 		
 		// jScrollWheel
