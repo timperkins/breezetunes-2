@@ -157,6 +157,10 @@
 		wp_register_script('placeholders', $tm_uri . '/js/placeholders.min.js');
 		wp_enqueue_script('placeholders');
 
+		// lodash.js
+		wp_register_script('lodash', $tm_uri . '/js/lodash.min.js');
+		wp_enqueue_script('lodash');
+
 		// loadmodal.js
 		wp_register_script('loadmodal', $tm_uri . '/js/jquery.loadmodal.js', array('jquery', 'bootstrap'));
 		wp_enqueue_script('loadmodal');

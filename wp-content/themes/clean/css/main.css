@@ -66,7 +66,7 @@ p {
 .default-wrap p {
 	margin-bottom: 5px;
 }
-p.section-description {
+p.section-description, .section-description p {
 	font-size: 18px;
 	margin-bottom: 40px;
 }
@@ -84,7 +84,7 @@ p.section-description {
 		font-size: 44px;
 	}		
 	
-	p.section-description {
+	p.section-description, .section-description p {
 		font-size: 22px;
 	}
 }
@@ -1480,9 +1480,11 @@ html[xmlns] .clearfix {
 		margin-left: 300px;
 	}
 	/* sacred-music */
+	/*
 	.page-sacred-music .main-sheet-music-wrap .main-sheet-music .main-sheet-music-inner {
 		margin-left: 0;
 	}
+	*/
 	.main-sheet-music .content {
 		width: 100%;
 		float: right;
@@ -1736,4 +1738,40 @@ footer .menu-inner {
 .arrangements-table tr td {
 	border-bottom: solid 1px #ccc;
 	padding: 10px;
+}
+
+
+/* Music filter section */
+.main-sheet-music .music-filter-sidebar {
+	background: transparent;
+	padding-top: 70px;
+}
+.main-sheet-music .music-filter-sidebar h3 {
+	font-size: 20px;
+	margin-bottom: 20px;
+}
+.main-sheet-music .music-filter-sidebar .checkbox {
+	margin-bottom: 10px;
+}
+.main-sheet-music .music-filter-sidebar .checkbox .label {
+	font-size: 17px;
+	font-weight: 100;
+	display: inline-block;
+	margin-left: 15px;
+	width: 85%;
+	-webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.main-sheet-music .music-filter-sidebar {
+
+}
+.main-sheet-music .music-filter-sidebar {
+
+}
+.sheet-item-wrap.hide {
+	display: none;
 }

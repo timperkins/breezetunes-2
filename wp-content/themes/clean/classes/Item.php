@@ -27,6 +27,8 @@
 				$item->id = get_the_ID();
 				$item->title = get_the_title();
 
+				$item->tags = get_the_tags();
+
 				// Record the price in cents
 				$item->price = get_field('price') * 100;
 
@@ -84,6 +86,8 @@
 				$item->id = get_the_ID();
 				$item->title = get_the_title();
 
+				$item->tags = get_the_tags();
+
 				// Record the price in cents
 				$item->price = get_field('price') * 100;
 
@@ -121,6 +125,14 @@
 
 			$in_dollars = $this->price * .01;
 			return '$' . $in_dollars;
+		}
+		public function tag_names() {
+			$arr = array();
+			if (empty($this->tags)) { return ''; }
+			foreach ($this->tags as $tag) {
+				$arr[] = $tag->name;
+			}
+			return implode(':::', $arr);
 		}
 	}
 ?>

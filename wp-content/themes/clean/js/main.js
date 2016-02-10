@@ -1,3 +1,124 @@
+// Pagination
+$(function() {
+	// Only run this on the music for sale list page
+	if (!$('.js-music-list').length) { return; }
+
+	var $taggedItems = $('[data-tags]');
+
+	var allTagGroup = {
+		name: 'All',
+		id: 'all',
+		rows: $taggedItems,
+		applyToAll: true
+	};
+
+	var tagGroups = [allTagGroup];
+
+	// Populate 'tagGroups'
+	$taggedItems.each(function() {
+		var $item = $(this);
+		var itemTags = $item.data('tags');
+		_.each(itemTags.split(':::'), function(itemTag) {
+			if (_.get(itemTag, 'length')) {
+				var tagGroup = _.find(tagGroups, {name: itemTag});
+				if (!tagGroup) {
+					tagGroup = {
+						name: itemTag,
+						id: itemTag.toLowerCase().replace(/[\s,]/g, '-'),
+						rows: $item
+					};
+					tagGroups.push(tagGroup);
+				} else {
+					tagGroup.rows = tagGroup.rows.add($item);
+				}
+			}
+		});
+	});
+
+	// Create the checkboxes and put them in the sidebar
+	var $sidebar = $('.music-filter-sidebar .sidebar-filter-options');
+	_.each(tagGroups, function(tagGroup) {
+		var $checkbox = $('<input type="checkbox" checked="checked">')
+		var $checkboxWrap = $('<div class="checkbox">')
+			.append($('<label>')
+				.append($checkbox)
+				.append($('<span class="label">').text(tagGroup.name + ' (' + tagGroup.rows.length + ')'))
+			)
+		.appendTo($sidebar);
+
+		tagGroup.checkbox = $checkbox;
+
+		$checkbox.on('change', function(e) {
+			var hashParams = [];
+			var filterTagGroups = _.filter(tagGroups, function(o) {
+				return !o.applyToAll;
+			});
+			var checkedTagGroups = _.filter(filterTagGroups, function(o) {
+				return o.checkbox.prop('checked');
+			});
+			// No hash if "All" is checked or all of the others are checked
+			if (tagGroup.applyToAll) {
+				if (!e.target.checked) {
+					hashParams.push('none');
+				}
+			} else if (!checkedTagGroups.length) {
+				hashParams.push('none');
+			} else if (filterTagGroups.length !== checkedTagGroups.length) {
+				_.each(tagGroups, function(tagGroup) {
+					if (tagGroup.applyToAll) { return; }
+					if (tagGroup.checkbox.prop('checked')) {
+						hashParams.push(tagGroup.id);
+					}
+				});
+			}
+			window.location.hash = hashParams.join(',');
+		});
+	});
+
+
+	window.addEventListener('hashchange', displayVisibleOptions);
+
+	function displayVisibleOptions() {
+		var checkedIds = _.compact(window.location.hash.replace('#', '').split(','));
+		if (!checkedIds.length) {
+			checkedIds = _.map(tagGroups, 'id');
+		}
+
+		var visibleTagGroups = [];
+		var hiddenTagGroups = [];
+		_.each(tagGroups, function(tagGroup) {
+			tagGroup.visible = checkedIds.indexOf(tagGroup.id) > -1;
+			if (checkedIds.indexOf(tagGroup.id) > -1) {
+				visibleTagGroups.push(tagGroup);
+			} else {
+				hiddenTagGroups.push(tagGroup);
+			}
+		});
+
+		var visibleRows = [];
+		_.each(visibleTagGroups, function(tagGroup) {
+			tagGroup.rows.each(function() {
+				$(this).removeClass('hide');
+				if (visibleRows.indexOf(this) < 0) {
+					visibleRows.push(this);
+				} 
+			});
+			tagGroup.checkbox.prop('checked', true);
+		});
+
+		_.each(hiddenTagGroups, function(tagGroup) {
+			tagGroup.rows.each(function() {
+				if (visibleRows.indexOf(this) < 0) {
+					$(this).addClass('hide');
+				}
+			});
+			tagGroup.checkbox.prop('checked', false);
+		});
+	}
+	displayVisibleOptions();
+
+});
+
 // Menu object
 var Menu = (function() {
 	var pub = {};
